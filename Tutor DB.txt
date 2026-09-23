@@ -1,0 +1,91 @@
+CREATE TABLE Student (
+Student_ID NUMBER (3), 
+First_Name VARCHAR2(30),
+Last_Name VARCHAR2(30),
+Phone_Number VARCHAR2 (15), 
+Email VARCHAR2(30),
+CONSTRAINT PK_Student PRIMARY KEY(Student_ID)
+);
+
+CREATE TABLE Tutor (
+	Tutor_ID NUMBER(3),
+	First_Name VARCHAR2(25),
+	Last_Name VARCHAR2(25),
+	Phone_Number VARCHAR2(15),
+	Session_Cost NUMERIC(5,2),
+	Email VARCHAR2(50),
+	Total_Completed_Sessions NUMBER(30),
+	CONSTRAINT PK_Tutor PRIMARY KEY(Tutor_ID)
+);
+
+CREATE TABLE Appointment (
+	Appointment_ID NUMBER(3),
+	Student_ID NUMBER (3), 
+	Tutor_ID NUMBER(3),
+	Appt_Date DATE,
+	Time VARCHAR2(30),
+	Room_Number VARCHAR(30),
+	Status VARCHAR(30),
+	Payment_amount NUMERIC (5,2),
+	Rating NUMBER(2),
+	Student_Comment VARCHAR(200),
+	Review_date DATE,
+CONSTRAINT Appointment_PK PRIMARY KEY (Appointment_ID),
+CONSTRAINT Appointment_FK1 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID),
+CONSTRAINT Appointment_FK2 FOREIGN KEY (Tutor_ID) REFERENCES
+Tutor(Tutor_ID)
+);
+
+CREATE TABLE Availability (
+	Availability_ID NUMBER(3),
+	Tutor_ID NUMBER(3),
+	Day_of_week VARCHAR2(10),
+	Time VARCHAR2(10),
+	Status VARCHAR2(20),
+	CONSTRAINT Availability_PK PRIMARY KEY (Availability_ID, Tutor_ID),
+	CONSTRAINT Availability_FK FOREIGN KEY (Tutor_ID) REFERENCES Tutor(Tutor_ID)
+);
+
+
+
+INSERT INTO Student (Student_ID, First_Name, Last_Name, Phone_Number, Email) VALUES (101, 'Savannah', 'Joshee', '(410)123-1010', 'sjoshee2@umbc.edu');
+
+INSERT INTO Student (Student_ID, First_Name, Last_Name, Phone_Number, Email) VALUES (102, 'Jamie', 'Hoang', '(410)123-1020', 'jhoang4@umbc.edu'); 
+ 
+INSERT INTO Student (Student_ID, First_Name, Last_Name, Phone_Number, Email) VALUES (103, 'Gavin', 'Naar', '(410)123-1030', 'gnaar1@umbc.edu');
+
+INSERT INTO Student (Student_ID, First_Name, Last_Name, Phone_Number, Email) VALUES (104, 'Chase', 'Torockio', '(410)123-1040', 'chaset1@umbc.edu');
+
+INSERT INTO Student (Student_ID, First_Name, Last_Name, Phone_Number, Email) VALUES (105, 'Elif', 'Meral', '(443)123-1050', 'elifm1@umbc.edu'); 
+
+
+
+INSERT INTO Tutor (Tutor_ID, First_Name, Last_Name, Phone_Number, Session_Cost, Email, Total_Completed_Sessions) VALUES (201, 'Bob', 'Ross', '(444)555-7777', 35.00, 'bross5@umbc.edu', 22);
+
+INSERT INTO Tutor (Tutor_ID, First_Name, Last_Name, Phone_Number, Session_Cost, Email, Total_Completed_Sessions) VALUES (202, 'Steve', 'Harvey', '(433)131-1111', 49.99, 'sharvey8@umbc.edu', 35);
+
+INSERT INTO Tutor (Tutor_ID, First_Name, Last_Name, Phone_Number, Session_Cost, Email, Total_Completed_Sessions) VALUES (203, 'Anakin 7', 'Skywalker', '(386)442-9977', 25.00, 'aSkywalker5@umbc.edu', 5);
+
+
+
+INSERT INTO Appointment(Appointment_ID, Student_ID, Tutor_ID, Appt_Date, Time, Room_Number, Status, Payment_amount, Rating, Student_Comment, Review_date) VALUES (401, 101, 201, TO_DATE('2026-03-25', 'YYYY-MM-DD'), '2:00 PM', 'ITE 233', 'Completed', 35.00, 4, 'Provided good examples', TO_DATE('2026-03-25', 'YYYY-MM-DD'));
+
+INSERT INTO Appointment(Appointment_ID, Student_ID, Tutor_ID, Appt_Date, Time, Room_Number, Status, Payment_amount, Rating, Student_Comment, Review_date) VALUES (402, 102, 202, TO_DATE('2026-03-28', 'YYYY-MM-DD'), '3:00 PM', 'ILSB 118', 'Completed', 49.99, 5, 'Great tutoring experience', TO_DATE('2026-03-28', 'YYYY-MM-DD'));
+
+INSERT INTO Appointment(Appointment_ID, Student_ID, Tutor_ID, Appt_Date, Time, Room_Number, Status, Payment_amount) VALUES (403, 103, 201, TO_DATE('2026-04-08', 'YYYY-MM-DD'), '12:00 PM', 'ITE 229', 'Pending', 35.00);
+
+INSERT INTO Appointment(Appointment_ID, Student_ID, Tutor_ID, Appt_Date, Time, Room_Number, Status, Payment_amount, Rating, Student_Comment, Review_date) VALUES (404, 104, 203, TO_DATE('2026-04-12', 'YYYY-MM-DD'), '11:00 AM', 'ITE 233', 'Completed', 25.00, 3, 'Explained most things clearly', TO_DATE('2026-04-12', 'YYYY-MM-DD'));
+
+INSERT INTO Appointment(Appointment_ID, Student_ID, Tutor_ID, Appt_Date, Time, Room_Number, Status, Payment_amount, Rating, Student_Comment, Review_date) VALUES (405, 105, 203, TO_DATE('2026-04-16', 'YYYY-MM-DD'), '5:00 PM', 'ENG 022', 'Completed', 25.00, 4, 'Very easy to understand', TO_DATE('2026-04-16', 'YYYY-MM-DD'));
+
+
+INSERT INTO Availability (Availability_ID, Tutor_ID, Day_of_Week, Time, Status) VALUES (301, 201, 'Monday', '10:00am', 'Available');
+
+INSERT INTO Availability (Availability_ID, Tutor_ID, Day_of_Week, Time, Status) VALUES (302, 201, 'Tuesday', '11:00am', 'Available');
+
+INSERT INTO Availability (Availability_ID, Tutor_ID, Day_of_Week, Time, Status) VALUES (303, 202, 'Friday', '9:00am', 'Available');
+
+INSERT INTO Availability (Availability_ID, Tutor_ID, Day_of_Week, Time, Status) VALUES (304, 202, 'Thursday', '1:00pm', 'Available');
+
+INSERT INTO Availability (Availability_ID, Tutor_ID, Day_of_Week, Time, Status) VALUES (305, 203, 'Tuesday', '2:00pm', 'Available');
+
